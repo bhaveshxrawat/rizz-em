@@ -5,7 +5,7 @@ import "./globals.css";
 const grandHotel = Grand_Hotel({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-    title: "Pickup Line Generator",
+    title: "Rizz'em",
     description: "Generate pickup line using AI.",
 };
 
