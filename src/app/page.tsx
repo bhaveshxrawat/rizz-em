@@ -7,7 +7,7 @@ export default function Home() {
                 Generator
             </h1>
             <a
-                href="#"
+                href="/login"
                 className="bg-b-pink flex items-center text-[2rem] md:text-2xl px-6 py-[0.625rem] rounded-[2rem] heart gap-2 mt-[13.25rem] -translate-x-3"
             >
                 Generate one for me
