@@ -3,7 +3,13 @@ import { FormEvent, useState } from "react";
 import Label from "./Label";
 import pickupLinePromptG from "@/utils/gemini/prompt";
 
-export default function Form() {
+export default function Form({
+    cn,
+    setErrorOccurred,
+}: {
+    cn: string;
+    setErrorOccurred: any;
+}) {
     const [detailsInput, setDetailsInput] = useState("");
     const [styleInput, setStyleInput] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
@@ -19,13 +25,16 @@ export default function Form() {
             const result = await pickupLinePromptG(detailsInput, styleInput);
             setGeneratedContent(result);
         } catch (err) {
-            console.log(err);
+            setErrorOccurred(true);
         } finally {
             setIsGenerating(false);
+            setTimeout(() => {
+                setErrorOccurred(false);
+            }, 1500);
         }
     }
     return (
-        <form onSubmit={handleSubmit} className="mt-8">
+        <form onSubmit={handleSubmit} className={`${cn} mt-8`}>
             <div className="flex flex-col">
                 <Label
                     forAtt="Crush Details"

@@ -20,6 +20,6 @@ export default async function pickupLinePromptG(
         const text = response.text();
         return text;
     } catch (err) {
-        console.log(err);
+        throw new Error(`An error occurred: ${err!}`);
     }
 }
