@@ -2,7 +2,7 @@
 
 Rizz-em is a Google Gemini AI-powered webapp that generates pickup lines personalised for your crush.
 
-![Gradientext](https://gradientext-three.vercel.app/opengraph-image.jpeg?ac38307b1ca62bc5)
+![Gradientext](https://rizz-em.vercel.app/opengraph-image.jpeg?3e8be9ba1e35ca5e)
 
 ## About the Project
 
