@@ -21,5 +21,5 @@ export async function GET(request: Request) {
 
     // TODO: Create this page
     // return the user to an error page with instructions
-    return NextResponse.redirect(`${origin}/auth/auth-error`);
+    return NextResponse.redirect(`${origin}`);
 }
