@@ -13,7 +13,7 @@ export default function Form({
     const [detailsInput, setDetailsInput] = useState("");
     const [styleInput, setStyleInput] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
-    const [generatedContent, setGeneratedContent] = useState<string>("");
+    const [generatedContent, setGeneratedContent] = useState<string | null>("");
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
