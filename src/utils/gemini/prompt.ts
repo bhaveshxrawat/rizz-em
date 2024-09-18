@@ -1,24 +1,34 @@
 "use server";
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 
 export default async function pickupLinePromptG(
     detailsInput: string,
     styleInput: string
 ) {
     try {
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-        const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
-            generationConfig: { responseMimeType: "text/plain" },
+        const openai = new OpenAI({
+            baseURL: "https://openrouter.ai/api/v1",
+            apiKey: `${process.env.OPENROUTER}`,
+            defaultHeaders: {
+                "HTTP-Referer": "https://rizz-em.vercel.app", // Optional, for including your app on openrouter.ai rankings.
+                "X-Title": "Rizz-em", // Optional. Shows in rankings on openrouter.ai.
+            },
         });
-        const prompt = `Suggest me one pickup line for my crush. About my crush, ${detailsInput}. The pickup line should have a ${
-            styleInput || "funny"
-        } vibe.`;
-        const result = await model.generateContent(prompt);
-        const response = result.response;
-        const text = response.text();
-        return text;
+
+        const completion = await openai.chat.completions.create({
+            model: "openai/gpt-4o-mini",
+            messages: [
+                {
+                    role: "user",
+                    content: `You are smooth talker, verbal casanova, flirtation virtuoso tasked to create a short, clever conversation starter for my crush using the following attributes: ${detailsInput}. Refrain from using the "Are you a" template and cheesy lines. It should have a ${
+                        styleInput || "funny"
+                    } vibe. It is important that you keep it under 80 characters.`,
+                },
+            ],
+        });
+        return completion.choices[0].message.content;
     } catch (err) {
         throw new Error(`An error occurred: ${err!}`);
     }

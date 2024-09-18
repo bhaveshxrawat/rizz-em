@@ -13,9 +13,7 @@ export default function Form({
     const [detailsInput, setDetailsInput] = useState("");
     const [styleInput, setStyleInput] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
-    const [generatedContent, setGeneratedContent] = useState<
-        string | undefined
-    >();
+    const [generatedContent, setGeneratedContent] = useState<string>("");
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
@@ -42,7 +40,7 @@ export default function Form({
                 />
                 <textarea
                     name="Crush Details"
-                    className="inputarea h-[124px] resize-none"
+                    className="inputarea text-2xl h-[124px] resize-none"
                     placeholder="She is a 10"
                     value={detailsInput}
                     onChange={(e) => setDetailsInput(e.target.value)}

@@ -2,11 +2,16 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseReqResClient } from "./lib/supabase/server";
 
 export async function middleware(request: NextRequest) {
+    const isDevelopment = process.env.NEXT_PUBLIC_DEV_MODE === "true";
     let response = NextResponse.next({
         request: {
             headers: request.headers,
         },
     });
+
+    if (isDevelopment) {
+        return response;
+    }
 
     const supabase = createSupabaseReqResClient(request, response);
 
