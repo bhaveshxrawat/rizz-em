@@ -3,20 +3,20 @@
 // import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 
-export default async function pickupLinePromptG(
+const openai = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: `${process.env.OPENROUTER}`,
+    defaultHeaders: {
+        "HTTP-Referer": "https://rizz-em.vercel.app", // Optional, for including your app on openrouter.ai rankings.
+        "X-Title": "Rizz-em", // Optional. Shows in rankings on openrouter.ai.
+    },
+});
+
+export default async function pickupLinePrompt(
     detailsInput: string,
     styleInput: string
 ) {
     try {
-        const openai = new OpenAI({
-            baseURL: "https://openrouter.ai/api/v1",
-            apiKey: `${process.env.OPENROUTER}`,
-            defaultHeaders: {
-                "HTTP-Referer": "https://rizz-em.vercel.app", // Optional, for including your app on openrouter.ai rankings.
-                "X-Title": "Rizz-em", // Optional. Shows in rankings on openrouter.ai.
-            },
-        });
-
         const completion = await openai.chat.completions.create({
             model: "openai/gpt-4o-mini",
             messages: [

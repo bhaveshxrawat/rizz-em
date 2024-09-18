@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import Label from "./Label";
-import pickupLinePromptG from "@/utils/gemini/prompt";
+import pickupLinePrompt from "@/utils/prompt";
 
 export default function Form({
     cn,
@@ -13,15 +13,15 @@ export default function Form({
     const [detailsInput, setDetailsInput] = useState("");
     const [styleInput, setStyleInput] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
-    const [generatedContent, setGeneratedContent] = useState<string | null>("");
+    const [generatedContent, setGeneratedContent] = useState<string>("");
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
         if (detailsInput.trim() === "") return;
         try {
             setIsGenerating(true);
-            const result = await pickupLinePromptG(detailsInput, styleInput);
-            setGeneratedContent(result);
+            const result = await pickupLinePrompt(detailsInput, styleInput);
+            if (result) setGeneratedContent(result);
         } catch (err) {
             setErrorOccurred(true);
         } finally {
@@ -40,7 +40,7 @@ export default function Form({
                 />
                 <textarea
                     name="Crush Details"
-                    className="inputarea text-2xl h-[124px] resize-none"
+                    className="inputarea h-[124px] resize-none"
                     placeholder="She is a 10"
                     value={detailsInput}
                     onChange={(e) => setDetailsInput(e.target.value)}
